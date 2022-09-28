@@ -9,11 +9,6 @@ dotenv.config();
 
 const password = process.env.PASS as unknown as string;
 const pepper = process.env.PEPPER as unknown as string;
-// const rounds = parseInt(process.env.SALT_ROUNDS as unknown as string);
-
-// const hash = bcrypt.hashSync(password + pepper, rounds);
-
-// console.log(hash);
 
 routes.get("/", (_req: Request, res: Response) => {
   res.json(data);
@@ -27,7 +22,6 @@ routes.post("/", (req: Request, res: Response) => {
       label: req.body.label,
     };
     data.unshift(img);
-    console.log(data);
     res.json(data[0]);
   } catch (err) {
     res.json("error: " + err);
@@ -36,12 +30,23 @@ routes.post("/", (req: Request, res: Response) => {
 
 routes.delete("/", (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-
-    if (bcrypt.compareSync(req.body.password + pepper, password)) {
-      res.json(1);
+    if (
+      req.body.password &&
+      bcrypt.compareSync(req.body.password + pepper, password)
+    ) {
+      if (req.body.id) {
+        let n: number;
+        data.forEach((d, i) => {
+          if (req.body.id && d.id == req.body.id) {
+            data.splice(i, 1);
+          }
+        });
+        res.json(data);
+      } else {
+        res.status(400).send("bad request");
+      }
     } else {
-      res.json("wrong password");
+      throw new Error("wrong password");
     }
   } catch (err) {
     res.json("error: " + err);
