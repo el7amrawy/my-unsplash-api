@@ -39,7 +39,7 @@ jobs:
           name: configure heroku
           # TODO: Install, build, deploy in both apps
           command: |
-            heroku config:set PASS=$PASS  PEPPER=$PEPPER
+            heroku config:set PASS=$PASS  PEPPER=$PEPPER -a $HEROKU_APP_NAME
       - run:
           name: Deploy to heroku
           # TODO: Install, build, deploy in both apps
