@@ -32,7 +32,7 @@ jobs:
           name: Add .env
           # TODO: Install, build, deploy in both apps
           command: |
-            echo  PASS=$PASS PEPPER=$PEPPER > ./.env
+            echo  PASS=$PASS PEPPER=$PEPPER > ./.env && cat .env
       - run:
           name: Deploy to heroku
           # TODO: Install, build, deploy in both apps
