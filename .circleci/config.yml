@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.2
+  heroku: circleci/heroku@2.0
 jobs:
   build:
     docker:
@@ -28,11 +29,17 @@ jobs:
       - node/install:
           node-version: "16.17.1"
       - checkout
+      - heroku/install
+      # - run:
+      #     name: configure env
+      #     # TODO: Install, build, deploy in both apps
+      #     command: |
+      #       echo  PASS=$PASS PEPPER=$PEPPER > ./.env && cat .env
       - run:
-          name: Add .env
+          name: configure heroku
           # TODO: Install, build, deploy in both apps
           command: |
-            echo  PASS=$PASS PEPPER=$PEPPER > ./.env && cat .env
+            heroku config:set PASS=$PASS  PEPPER=$PEPPER
       - run:
           name: Deploy to heroku
           # TODO: Install, build, deploy in both apps
