@@ -22,9 +22,9 @@ routes.post("/", (req: Request, res: Response) => {
       label: req.body.label,
     };
     data.unshift(img);
-    res.json(data[0]);
+    res.json(data);
   } catch (err) {
-    res.json("error: " + err);
+    res.status(406).json("error: " + err);
   }
 });
 
@@ -49,7 +49,7 @@ routes.delete("/", (req: Request, res: Response) => {
       throw new Error("wrong password");
     }
   } catch (err) {
-    res.json("error: " + err);
+    res.status(401).json("error: " + err);
   }
 });
 
