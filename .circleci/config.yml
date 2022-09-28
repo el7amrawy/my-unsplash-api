@@ -29,6 +29,11 @@ jobs:
           node-version: "16.17.1"
       - checkout
       - run:
+          name: Add .env
+          # TODO: Install, build, deploy in both apps
+          command: |
+            echo  PASS=$PASS PEPPER=$PEPPER > ./.env
+      - run:
           name: Deploy to heroku
           # TODO: Install, build, deploy in both apps
           command: |
