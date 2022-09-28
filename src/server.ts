@@ -3,9 +3,9 @@ import routes from "./api";
 
 const app: Application = express();
 
-app.use(routes);
-
 app.use(express.json());
+
+app.use(routes);
 
 const port = process.env.PORT || 3000;
 
