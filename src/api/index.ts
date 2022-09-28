@@ -9,7 +9,6 @@ dotenv.config();
 
 const password = process.env.PASS as unknown as string;
 const pepper = process.env.PEPPER as unknown as string;
-// console.log(password, pepper);
 
 routes.get("/", (_req: Request, res: Response) => {
   res.json(data);

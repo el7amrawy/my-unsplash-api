@@ -9,8 +9,7 @@
   "scripts": {
     "start": "node dist/server",
     "build": "tsc",
-    "dev": "nodemon ./src/server.ts",
-    "deploy": "git push heroku master"
+    "dev": "nodemon ./src/server.ts"
   },
   "keywords": [],
   "author": "",
